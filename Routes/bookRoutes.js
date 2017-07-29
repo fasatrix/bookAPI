@@ -2,6 +2,8 @@ var express = require('express');
 var model = require('../models/model.json')();
 const validate = require('express-json-schema-validation').ValidationMiddleware();
 // const validator = require('express-json-schema-validation').Validator;
+var Common = require('../commons/common');
+var commonInst = new Common();
 
 var routes = function (Book){
 
@@ -30,15 +32,8 @@ var routes = function (Book){
 		});		
 		bookRouter.route('/:bookid')
 			.get(function(req, res){
-				book = {
-	      					"id"	: req.book._id,
-		      				"title" : req.book.title,
-					        "genre" : req.book.genre,
-					        "author": req.book.author,
-					        "read"  : req.book.read,
-					        "relatedBook": req.book.relatedBooks
-		      			}
-				res.json(book);
+				res.json(commonInst.mapBook(req.book._id,req.book.title,req.book.genre,
+											req.book.author, req.book.read,req.book.relatedBooks));
 			})
 			.put(function(req, res){
       			req.book.title = req.body.title;
