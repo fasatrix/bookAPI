@@ -2,7 +2,7 @@
   "name": "bookapi",
   "version": "1.0.0",
   "description": "A simple book api",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
      "start": "gulp"
   },
